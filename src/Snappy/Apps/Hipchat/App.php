@@ -2,8 +2,9 @@
 
 use Snappy\Apps\App as BaseApp;
 use Snappy\Apps\TagsChangedHandler;
+use Snappy\Apps\WallPostHandler;
 
-class App extends BaseApp implements TagsChangedHandler {
+class App extends BaseApp implements TagsChangedHandler, WallPostHandler {
 
 	/**
 	 * The name of the application.
