@@ -72,7 +72,7 @@ class App extends BaseApp implements TagsChangedHandler, WallPostHandler {
 		{
 			$client = $this->getClient();
 
-			$text = $wall['content'].' - <a href="https://app.besnappy.com/#wall">https://app.besnappy.com/#wall</a>';
+			$text = '<a href="https://app.besnappy.com/#wall">https://app.besnappy.com/#wall</a> - '. $wall['content'];
 
 			$client->message_room($this->config['room'], 'Snappy', $text);
 		}
