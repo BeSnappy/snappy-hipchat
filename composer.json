@@ -1,6 +1,6 @@
 {
-    "name": "vendor/project",
-    "description": "",
+    "name": "snappy/hipchat",
+    "description": "Notify HipChat with tickets or wall posts.",
     "authors": [
         {
             "name": "UserScape",
