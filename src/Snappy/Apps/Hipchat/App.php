@@ -10,21 +10,21 @@ class App extends BaseApp implements TagsChangedHandler {
 	 *
 	 * @var string
 	 */
-	public $name = 'Hipchat';
+	public $name = 'HipChat';
 
 	/**
 	 * The application description.
 	 *
 	 * @var string
 	 */
-	public $description = 'Notify Hipchat.';
+	public $description = 'Notify HipChat with tickets and wall posts.';
 
 	/**
 	 * Any notes about this application
 	 *
 	 * @var string
 	 */
-	public $notes = '';
+	public $notes = '<p>You can find your HipChat <a href="https://www.hipchat.com/admin/api" target="_blank">API Token here</a>.</p>';
 
 	/**
 	 * The application's icon filename.
@@ -56,7 +56,7 @@ class App extends BaseApp implements TagsChangedHandler {
 		array('name' => 'token', 'type' => 'text', 'help' => 'Enter your HipChat <a href="https://www.hipchat.com/admin/api" target="_blank">v1 API Token</a>'),
 		array('name' => 'room', 'type' => 'text', 'help' => 'Enter your HipChat Room Name or ID'),
 		array('name' => 'wall_notify', 'type' => 'checkbox', 'help' => 'Notify on new wall posts?'),
-		array('name' => 'ticket_notify', 'type' => 'checkbox', 'help' => 'Notify on tickets tagged #hipchat?'),
+		array('name' => 'Watch for tag', 'type' => 'text', 'help' => 'Tickets with this tag will send a notification to HipChat'),
 	);
 
 	/**
@@ -65,7 +65,7 @@ class App extends BaseApp implements TagsChangedHandler {
 	 * @param  array  $wall
 	 * @return void
 	 */
-	public function handleWallCreated(array $wall)
+	public function handleWallPost(array $wall)
 	{
 		if ($this->config['wall_notify'])
 		{
@@ -87,7 +87,7 @@ class App extends BaseApp implements TagsChangedHandler {
 	 */
 	public function handleTagsChanged(array $ticket, array $added, array $removed)
 	{
-		if ($this->config['ticket_notify'] and in_array('#hipchat', $added))
+		if ($this->config['tag'] != "" and in_array($this->config['tag'], $added))
 		{
 			$client = $this->getClient();
 
