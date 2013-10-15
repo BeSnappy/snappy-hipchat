@@ -1,0 +1,21 @@
+{
+    "name": "vendor/project",
+    "description": "",
+    "authors": [
+        {
+            "name": "UserScape",
+            "email": "it@userscape.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "hipchat/hipchat-php": ">=1.0.0",
+        "snappy/app-support": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "minimum-stability": "dev"
+}
