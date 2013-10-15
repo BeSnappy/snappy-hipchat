@@ -20,6 +20,13 @@ class App extends BaseApp implements TagsChangedHandler {
 	public $description = 'Notify Hipchat.';
 
 	/**
+	 * Any notes about this application
+	 *
+	 * @var string
+	 */
+	public $notes = '';
+
+	/**
 	 * The application's icon filename.
 	 *
 	 * @var string
