@@ -55,7 +55,7 @@ class App extends BaseApp implements TagsChangedHandler {
 	public $settings = array(
 		array('name' => 'token', 'type' => 'text', 'help' => 'Enter your HipChat v1 API Token'),
 		array('name' => 'room', 'type' => 'text', 'help' => 'Enter your HipChat Room Name or ID'),
-		array('name' => 'wall_notify', 'type' => 'checkbox', 'help' => 'Notify on new wall posts?'),
+		array('name' => 'wall_notify', 'label' => 'Wall Notification', 'type' => 'checkbox', 'help' => 'Notify on new wall posts?'),
 		array('name' => 'tag', 'label' => 'Watch for tag', 'type' => 'text', 'placeholder' => '#hipchat', 'help' => 'Tickets with this tag will send a notification to HipChat'),
 	);
 
