@@ -35,6 +35,13 @@ class App extends BaseApp implements TagsChangedHandler, WallPostHandler {
 	public $icon = 'hipchat.png';
 
 	/**
+	 * The application service's main website.
+	 *
+	 * @var string
+	 */
+	public $website = 'https://hipchat.com';
+
+	/**
 	 * The application author name.
 	 *
 	 * @var string
