@@ -3,7 +3,6 @@
 use Snappy\Apps\App as BaseApp;
 use Snappy\Apps\WallPostHandler;
 use Snappy\Apps\IncomingMessageHandler;
-use Snappy\Apps\TicketWaitingHandler;
 
 class App extends BaseApp implements WallPostHandler, IncomingMessageHandler {
 
@@ -99,26 +98,8 @@ class App extends BaseApp implements WallPostHandler, IncomingMessageHandler {
 			$client = $this->getClient();
 
 			$url = 'https://app.besnappy.com/#ticket/'.$message['ticket']['id'];
-			$text = $message['ticket']['default_subject'].' - <a href="'.$url.'">'.$url.'</a>';
 
-			$client->message_room($this->config['room'], 'Snappy', $text);
-		}
-	}
-
-	/**
-	 * Handle a ticket with a status that is now "waiting".
-	 *
-	 * @param  array  $ticket
-	 * @return void
-	 */
-	public function handleTicketWaiting(array $ticket)
-	{
-		if ($this->config['tag'] != "" and in_array($this->config['tag'], $ticket['tags']))
-		{
-			$client = $this->getClient();
-
-			$url = 'https://app.besnappy.com/#ticket/'.$ticket['id'];
-			$text = $ticket['default_subject'].' - <a href="'.$url.'">'.$url.'</a>';
+			$text = $this->limit($message['ticket']['default_subject'].' - '. $message['content']) .' <a href="'.$url.'">'.$url.'</a>';
 
 			$client->message_room($this->config['room'], 'Snappy', $text);
 		}
@@ -136,4 +117,18 @@ class App extends BaseApp implements WallPostHandler, IncomingMessageHandler {
 		return $client;
 	}
 
+	/**
+	* Limit the number of characters in a string.
+	*
+	* @param  string  $value
+	* @param  int     $limit
+	* @param  string  $end
+	* @return string
+	*/
+	protected function limit($value, $limit = 900, $end = '...')
+	{
+		if (mb_strlen($value) <= $limit) return $value;
+
+		return mb_substr($value, 0, $limit, 'UTF-8').$end;
+	}
 }
